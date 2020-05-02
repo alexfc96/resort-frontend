@@ -37,12 +37,21 @@ export default class Resorts extends Component {
 
   renderResorts = () => {
     const { resorts } = this.state;
+    const { history } = this.props;
     return resorts.map((resort, index) => {
       return (
         <li key={index}>
-          {resort.name}
+          {resort.name}|{resort.latitude}|{resort.longitude}
           <button
-            onClick={(e) => {
+            onClick={() => {
+              history.push(`/resorts/${resort._id}/update`);
+              // this.handleUpdate(resort._id);
+            }}
+          >
+            update
+          </button>
+          <button
+            onClick={() => {
               this.handleDelete(resort._id);
             }}
           >

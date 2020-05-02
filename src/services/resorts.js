@@ -3,7 +3,7 @@ import axios from "axios";
 class ApiClient {
   constructor() {
     this.apiClient = axios.create({
-      baseURL: "http://localhost:3000/",
+      baseURL: "http://localhost:3005/",
     });
   }
 
@@ -11,8 +11,16 @@ class ApiClient {
     return this.apiClient.get("/resorts");
   }
 
+  getOneResort(id) {
+    return this.apiClient.get(`/resorts/${id}`);
+  }
+
   createResort(body) {
     return this.apiClient.post("/resorts", body);
+  }
+
+  updateResort(id, body){
+    return this.apiClient.put(`/resorts/${id}`, body)
   }
 
   deleteResort(id) {

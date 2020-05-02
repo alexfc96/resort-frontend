@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import apiClient from "../services/resorts";
+import ResortsForm from "../services/ResortsForm";
 
 export default class AddResort extends Component {
   state = {
@@ -14,10 +15,10 @@ export default class AddResort extends Component {
     });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (data) => {
+    // e.preventDefault();  ya esta comprobado en el form
     const { history } = this.props;
-    const { name, longitude, latitude } = this.state;
+    const { name, longitude, latitude } = data;
     apiClient
       .createResort({ name, latitude, longitude })
       .then((res) => {
@@ -31,30 +32,7 @@ export default class AddResort extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="latitude">Lat</label>
-          <input
-            type="number"
-            name="latitude"
-            id="latitude"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="longitude">Lon</label>
-          <input
-            type="number"
-            name="longitude"
-            id="longitude"
-            onChange={this.handleChange}
-          />
-          <input type="submit" value="submit" />
-        </form>
+        <ResortsForm handleSubmit={this.handleSubmit} />
       </div>
     );
   }
